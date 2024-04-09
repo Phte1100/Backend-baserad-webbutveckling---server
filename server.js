@@ -5,7 +5,7 @@ const path = require("path");
 require('dotenv').config({path: './.env'});
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
@@ -42,6 +42,10 @@ app.get('/api/cv', (req, res) => {
         }
         res.json(rows);
     });
+});
+
+app.get('/health', (req, res) => {
+    res.send('OK');
 });
 
 app.post('/api/cv', (req, res) => {
