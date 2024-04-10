@@ -79,6 +79,30 @@ app.delete('/api/cv/:id', (req, res) => {
     });
 });
 
+/*
+Hur en PUT skulle kunna se ut.
+
+app.put('/api/cv/:id', (req, res) => {
+    const cvId = req.params.id;
+    const { companyname, jobtitle, location, startdate, enddate, description } = req.body;
+    const query = `UPDATE cv SET companyname = ?, jobtitle = ?, location = ?, startdate = ?, enddate = ?, description = ? WHERE id = ?`;
+    const params = [companyname, jobtitle, location, startdate, enddate, description, cvId];
+
+    connection.query(query, params, (error, results) => {
+        if (error) {
+            console.error('Error updating cv:', error);
+            return res.status(500).json({ error: "Kunde inte uppdatera informationen i databasen." });
+        }
+
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ error: "Ingen post med det angivna ID:et hittades." });
+        }
+
+        res.json({ success: true, message: 'CV post uppdaterad', updatedId: cvId });
+    });
+});
+*/
+
 // Startar servern och lyssnar på angiven port
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
