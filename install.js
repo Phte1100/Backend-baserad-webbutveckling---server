@@ -33,7 +33,7 @@ connection.query("DROP TABLE IF EXISTS cv;", (err, results) => {
     console.log("Tabellen cv raderas!");
 });
 
-// Skapar en ny tabell "kurser" i databasen med angivna kolumner och datatyper
+// Skapar en ny tabell "cv" i databasen med angivna kolumner och datatyper
 connection.query(`CREATE TABLE cv (
     id INT AUTO_INCREMENT PRIMARY KEY,
     companyname VARCHAR(255),

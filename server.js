@@ -29,11 +29,12 @@ connection.connect(err => {
     console.log("Connected to MySQL");
 });
 
-// Routes
+// Basroute som visar ett välkomstmeddelande
 app.get('/api', (req, res) => {
     res.json({ message: 'Welcome to my REST API' });
 });
 
+// Route för att hämta alla CV-poster
 app.get('/api/cv', (req, res) => {
     connection.query("SELECT * FROM cv", (err, rows) => {
         if (err) {
@@ -44,10 +45,12 @@ app.get('/api/cv', (req, res) => {
     });
 });
 
+// Health check route för att verifiera att servern är uppe
 app.get('/health', (req, res) => {
     res.send('OK');
 });
 
+// Route för att skapa en ny CV-post
 app.post('/api/cv', (req, res) => {
     const { companyname, jobtitle, location, startdate, enddate, description } = req.body;
     if (companyname && jobtitle && location && startdate && enddate && description) {
@@ -64,6 +67,7 @@ app.post('/api/cv', (req, res) => {
     }
 });
 
+// Route för att radera en CV-post baserat på ID
 app.delete('/api/cv/:id', (req, res) => {
     const cvId = req.params.id;
     connection.query('DELETE FROM cv WHERE id = ?', [cvId], (error, results) => {
@@ -75,6 +79,7 @@ app.delete('/api/cv/:id', (req, res) => {
     });
 });
 
+// Startar servern och lyssnar på angiven port
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
